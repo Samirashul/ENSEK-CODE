@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace ENSEK.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("/account-uploads")]
     public class AccountController : ControllerBase
     {
 

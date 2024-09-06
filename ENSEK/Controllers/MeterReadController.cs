@@ -6,7 +6,7 @@ using ENSEK.FileHandlers;
 namespace ENSEK.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("/meter-reading-uploads")]
     public class MeterReadController : ControllerBase
     {
 

@@ -11,8 +11,6 @@ namespace ENSEK.FileReaders
 
             List<string> lines = File.ReadLines(filename).ToList();
 
-            lines.RemoveAt(0);
-
             foreach (string s in lines)
                 accounts.Add(new Account(s));
 
