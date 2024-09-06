@@ -7,12 +7,12 @@ namespace ENSEK.Validation
 {
     public class MeterReadValidator : iMeterReadValidator
     {
-        private readonly string _meterReadRegex = "^[0-9]{5}$";
+        private readonly string _meterReadRegex = "^[0-9]{1,5}$";
 
         public bool IsMostRecentMeterRead(MeterRead meterRead)
         {
             MeterReadDataAdapter adapter = new MeterReadDataAdapter();
-            return (DateTime.Compare(meterRead.MeterReadDateTime, adapter.GetMostRecentMeterRead(meterRead.AccountId)) > 1);
+            return (DateTime.Compare(meterRead.MeterReadDateTime, adapter.GetMostRecentMeterRead(meterRead.AccountId)) > 0);
         }
 
         public bool IsReadValueCorrectFormat(MeterRead meterRead)

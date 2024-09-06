@@ -28,11 +28,57 @@ namespace ENSEK_TEST
         [TestMethod]
         public void TestUniqueAccountId()
         {
-            AccountDataAdapter adapter = new AccountDataAdapter();
             AccountValidator validator = new AccountValidator();
             Assert.IsFalse(validator.IsAccountIdUnique(new ENSEK.Models.Account(1 ,"Samir","Sabbagh")));
         }
 
-        //TODO seed meter reads
+        [TestMethod]
+        public void TestMostRecentMeterRead1()
+        {
+            MeterReadValidator validator = new MeterReadValidator();
+            Assert.IsTrue(validator.IsMostRecentMeterRead(new ENSEK.Models.MeterRead(2345, "45522", new DateTime(2019, 4, 22, 12, 26, 1))));
+        }
+
+        [TestMethod]
+        public void TestMostRecentMeterRead2()
+        {
+            MeterReadValidator validator = new MeterReadValidator();
+            Assert.IsFalse(validator.IsMostRecentMeterRead(new ENSEK.Models.MeterRead(2345, "45522", new DateTime(2019, 4, 22, 12, 25, 0))));
+        }
+
+        [TestMethod]
+        public void TestMostRecentMeterRead3()
+        {
+            MeterReadValidator validator = new MeterReadValidator();
+            Assert.IsFalse(validator.IsMostRecentMeterRead(new ENSEK.Models.MeterRead(2345, "45522", new DateTime(2019, 4, 22, 12, 24, 0))));
+        }
+
+        [TestMethod]
+        public void TestMeterReadFormat1()
+        {
+            MeterReadValidator validator = new MeterReadValidator();
+            Assert.IsFalse(validator.IsReadValueCorrectFormat(new ENSEK.Models.MeterRead(1, "this should fail", DateTime.MinValue)));
+        }
+
+        [TestMethod]
+        public void TestMeterReadFormat2()
+        {
+            MeterReadValidator validator = new MeterReadValidator();
+            Assert.IsFalse(validator.IsReadValueCorrectFormat(new ENSEK.Models.MeterRead(1, "123456", DateTime.MinValue)));
+        }
+
+        [TestMethod]
+        public void TestMeterReadFormat3()
+        {
+            MeterReadValidator validator = new MeterReadValidator();
+            Assert.IsFalse(validator.IsReadValueCorrectFormat(new ENSEK.Models.MeterRead(1, "", DateTime.MinValue)));
+        }
+
+        [TestMethod]
+        public void TestMeterReadFormat4()
+        {
+            MeterReadValidator validator = new MeterReadValidator();
+            Assert.IsTrue(validator.IsReadValueCorrectFormat(new ENSEK.Models.MeterRead(1, "12345", DateTime.MinValue)));
+        }
     }
 }
